@@ -5,8 +5,7 @@ var base = new Airtable({apiKey: 'key88K3RNIPwV1AgS'}).base('appLSROdM7sAWo7Xc')
 
 
 export async function deleteDeployment(deployment_id){
-  console.log("IN HERE");
-  console.log(deployment_id);
+
   var settings = {
     "async": true,
     "crossDomain": true,

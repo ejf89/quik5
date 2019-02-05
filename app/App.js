@@ -10,6 +10,7 @@ import { EmptyState, Layout, Page, Heading, Subheading } from '@shopify/polaris'
 
 const SHOPIFY_API_KEY = process.env.SHOPIFY_API_KEY
 
+
 import ApolloClient, {gql} from 'apollo-boost';
 import {ApolloProvider} from 'react-apollo';
 import {Mutation} from 'react-apollo';
@@ -35,7 +36,6 @@ const CREATE_PRODUCT = gql`
 export default function() {
   return (
     <ApolloProvider client={client}>
-
       <AppProvider apiKey={SHOPIFY_API_KEY} >
       <React.Fragment>
       <link rel="stylesheet" href="https://sdks.shopifycdn.com/polaris/3.6.0/polaris.min.css" />
