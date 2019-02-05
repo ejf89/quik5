@@ -7,19 +7,9 @@ import axios from 'axios';
 import { AppProvider, Link, AccountConnection } from '@shopify/polaris';
 import { EmptyState, Layout, Page, Heading, Subheading } from '@shopify/polaris';
 
-// import dotenv from 'dotenv'
-// dotenv.config();
-// const {SHOPIFY_API_KEY, SHOPIFY_SECRET} = process.env;
-// console.log("HERE");
-// console.log("HERE");
-// console.log("HERE");
 
 const SHOPIFY_API_KEY = process.env.SHOPIFY_API_KEY
-console.log("HERERER");
-console.log(SHOPIFY_API_KEY);
 
-
-//
 import ApolloClient, {gql} from 'apollo-boost';
 import {ApolloProvider} from 'react-apollo';
 import {Mutation} from 'react-apollo';
@@ -49,8 +39,6 @@ export default function() {
       <AppProvider apiKey={SHOPIFY_API_KEY} >
       <React.Fragment>
       <link rel="stylesheet" href="https://sdks.shopifycdn.com/polaris/3.6.0/polaris.min.css" />
-      <h1>QuikSite 222222</h1>
-
 
                     <Page>
                     <Heading>Please enter a store base url and product handle</Heading>

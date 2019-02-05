@@ -1,17 +1,10 @@
 import { EmptyState, Layout, Page, ResourcePicker, Heading, Subheading, Link, TextField, Button } from '@shopify/polaris';
 import { masterFetch } from './fetchModule'
 import { deleteDeployment } from './deleteModule'
-// import { TextField } from './textField'
 import axios from 'axios';
-// var $ = require('jquery');
 import {$,jQuery} from 'jquery';
 
 import React from 'react'
-// var fs = require('fs');
-
-
-
-
 
 class ExternalDeploy extends React.Component {
 

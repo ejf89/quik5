@@ -1,20 +1,5 @@
-
-// const fetch = require('node-fetch');
-//
-// var $ = require('jquery');
-// var fs = require('fs');
 import fetch from 'node-fetch'
-import {$,jQuery} from 'jquery';
-
-
-
-// const dotenv = require('dotenv');
-//
-// dotenv.config();
-//
-// const NOW_TOKEN = process.env.NOW_TOKEN;
-// console.log("TOKEN TEST");
-// console.log(NOW_TOKEN);
+var $ = require('jquery');
 
 export async function deleteDeployment(deployment_id){
   console.log("IN HERE");
