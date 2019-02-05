@@ -1,6 +1,6 @@
 import { EmptyState, Layout, Page, ResourcePicker, Heading, Subheading, Link, TextField, Button } from '@shopify/polaris';
-import { masterFetch } from './fetchModule'
-import { deleteDeployment } from './deleteModule'
+import { masterFetch, postToTable } from './fetchModule'
+import { deleteDeployment, updateInTable } from './deleteModule'
 import axios from 'axios';
 import {$,jQuery} from 'jquery';
 
@@ -25,7 +25,6 @@ class ExternalDeploy extends React.Component {
                        onAction: () => this.setState({ open: true }),
                    }}
                >
-
 
                    <TextField onChange={this.valueUpdater('store_url')}
                               value={this.state.store_url}
@@ -83,6 +82,11 @@ class ExternalDeploy extends React.Component {
        this.setState({external_deploy_url: 'https://' + res.url})
        this.setState({product_handle: this.state.external_product_handle})
        this.setState({delete_id: res.deploymentId})
+       return res
+     } )
+     .then( (res) => {
+       console.log(res);
+       postToTable( this.state.store_url, this.state.delete_id, this.state.external_product_handle )
      } )
    }
 
@@ -93,6 +97,7 @@ class ExternalDeploy extends React.Component {
        console.log(res);
          this.setState({deployment_response: res.state})
 
+         updateInTable(this.state.delete_id)
      } )
    }
 

@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import Koa from 'koa';
+var cors = require('koa-cors');
 import session from 'koa-session';
 import createShopifyAuth, {
   createVerifyRequest,
@@ -17,6 +18,7 @@ const {SHOPIFY_API_KEY, SHOPIFY_SECRET} = process.env;
 
 const app = new Koa();
 app.use(session(app));
+app.use(cors())
 
 app.keys = [SHOPIFY_SECRET];
 

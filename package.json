@@ -34,6 +34,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.3.1",
     "koa": "^2.5.0",
+    "koa-cors": "0.0.16",
     "koa-session": "^5.8.1",
     "koa-webpack": "^3.0.2",
     "nodemon": "^1.18.9",
