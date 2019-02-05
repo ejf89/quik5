@@ -14,6 +14,11 @@ import { EmptyState, Layout, Page, Heading, Subheading } from '@shopify/polaris'
 // console.log("HERE");
 // console.log("HERE");
 
+const SHOPIFY_API_KEY = process.env.SHOPIFY_API_KEY
+console.log("HERERER");
+console.log(SHOPIFY_API_KEY);
+
+
 //
 import ApolloClient, {gql} from 'apollo-boost';
 import {ApolloProvider} from 'react-apollo';
@@ -41,7 +46,7 @@ export default function() {
   return (
     <ApolloProvider client={client}>
 
-      <AppProvider apiKey={'27bf04c77437f1f1d1ce5496e1cb4467'} >
+      <AppProvider apiKey={SHOPIFY_API_KEY} >
       <React.Fragment>
       <link rel="stylesheet" href="https://sdks.shopifycdn.com/polaris/3.6.0/polaris.min.css" />
       <h1>QuikSite 222222</h1>
