@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import Koa from 'koa';
+var cors = require('koa-cors');
 import session from 'koa-session';
 import createShopifyAuth, {
   createVerifyRequest,
@@ -13,10 +14,11 @@ import HTML from '@shopify/react-html';
 import renderReactApp from './render-react-app';
 
 dotenv.config();
-const {SHOPIFY_API_KEY, SHOPIFY_SECRET} = process.env;
+const {SHOPIFY_API_KEY, SHOPIFY_SECRET, AIRTABLE_KEY} = process.env;
 
 const app = new Koa();
 app.use(session(app));
+app.use(cors())
 
 app.keys = [SHOPIFY_SECRET];
 

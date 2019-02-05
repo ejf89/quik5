@@ -1,6 +1,6 @@
-import { EmptyState, Layout, Page, ResourcePicker, Heading, Subheading, Link, TextField, Button } from '@shopify/polaris';
-import { masterFetch } from './fetchModule'
-import { deleteDeployment } from './deleteModule'
+import { EmptyState, Layout, Page,  Heading, Subheading, Link, TextField, Button } from '@shopify/polaris';
+import { masterFetch, postToTable } from './fetchModule'
+import { deleteDeployment, updateInTable } from './deleteModule'
 import axios from 'axios';
 import {$,jQuery} from 'jquery';
 
@@ -19,45 +19,43 @@ class ExternalDeploy extends React.Component {
 
    render() {
        return (
-               <Page
-                   primaryAction={{
-                       content: 'Select products',
-                       onAction: () => this.setState({ open: true }),
-                   }}
-               >
+               <Page>
+                 <Layout>
+                  <Layout.Section>
+                     <TextField onChange={this.valueUpdater('store_url')}
+                                value={this.state.store_url}
+                                 placeholder="enter base store url"
+                                label="Store Url Input (excluding '.myshopify.com')"
+                                >
+                     {this.state.store_url}</TextField>
+
+                     <TextField onChange={this.valueUpdater('external_product_handle')}
+                                value={this.state.external_product_handle}
+                                placeholder="eg: 'essential-bath-bundle'"
+                                label="Enter Product Handle"
+                                >
+                     {this.state.external_product_handle}</TextField>
+                     <br></br>
+                     <Button onClick={this.externalDeploy}>Deploy Quiksite</Button>
+                     <Heading>You're Quik.site will be available at:</Heading>
+                   </Layout.Section>
 
 
-                   <TextField onChange={this.valueUpdater('store_url')}
-                              value={this.state.store_url}
-                               placeholder="enter base store url"
-                              label="Store Url Input"
-                              >
-                   {this.state.store_url}</TextField>
-
-                   <TextField onChange={this.valueUpdater('external_product_handle')}
-                              value={this.state.external_product_handle}
-                              placeholder="enter product handle"
-                              label="Enter Product Handle"
-                              >
-                   {this.state.external_product_handle}</TextField>
+                       <Layout.Section>
+                       <Link url={this.state.external_deploy_url} external={true}>{this.state.product_handle}</Link>
 
 
-                   <Button onClick={this.externalDeploy}>External Store Deploy!</Button>
-
-                   <Heading>You're Quik.site will be available at:</Heading>
-                   <Link url={this.state.external_deploy_url} external={true}>{this.state.product_handle}</Link>
-
-
-                   <TextField onChange={this.valueUpdater('delete_id')}
-                              value={this.state.delete_id}
-                              placeholder="deployment ID for Deletion"
-                              label="Delete External Deployment"
-                              >
-                   {this.state.delete_id}</TextField>
-
-                   <Button onClick={this.externalDelete}>Delete Quiksite</Button>
-                   <Heading>{this.state.deployment_response}</Heading>
-
+                       <TextField onChange={this.valueUpdater('delete_id')}
+                                  value={this.state.delete_id}
+                                  placeholder="deployment ID for Deletion"
+                                  label="Delete External Deployment"
+                                  >
+                       {this.state.delete_id}</TextField>
+                       <br></br>
+                       <Button onClick={this.externalDelete}>Delete Quiksite</Button>
+                       <Heading>{this.state.deployment_response}</Heading>
+                    </Layout.Section>
+                   </Layout>
                </Page >
        );
    }
@@ -83,6 +81,11 @@ class ExternalDeploy extends React.Component {
        this.setState({external_deploy_url: 'https://' + res.url})
        this.setState({product_handle: this.state.external_product_handle})
        this.setState({delete_id: res.deploymentId})
+       return res
+     } )
+     .then( (res) => {
+       console.log(res);
+       postToTable( this.state.store_url, this.state.delete_id, this.state.external_product_handle )
      } )
    }
 
@@ -93,6 +96,7 @@ class ExternalDeploy extends React.Component {
        console.log(res);
          this.setState({deployment_response: res.state})
 
+         updateInTable(this.state.delete_id)
      } )
    }
 

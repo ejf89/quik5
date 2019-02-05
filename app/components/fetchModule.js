@@ -1,5 +1,15 @@
 import fetch from 'node-fetch'
 var $ = require('jquery');
+var Airtable = require('airtable')
+
+const AIRTABLE_KEY = process.env.AIRTABLE_KEY
+
+console.log(AIRTABLE_KEY);
+console.log('KEYCHECK');
+var base = new Airtable({apiKey: `key88K3RNIPwV1AgS`}).base('appLSROdM7sAWo7Xc');
+// var base = new Airtable({apiKey: `${AIRTABLE_KEY}`}).base('appLSROdM7sAWo7Xc');
+
+
 
 export async function masterFetch(store_url, product_handle){
   console.log(product_handle);
@@ -37,3 +47,21 @@ var postResponse = $.ajax(settings).then(function (response) {
 return postResponse
 
 }
+
+export function postToTable(store_url, dep_id, product_handle){
+  console.log('TRYING TO POST');
+
+    var record = base('Table 1').create({
+    "store_url": store_url,
+    "deployment_id": dep_id,
+    "product_handle": product_handle,
+    "live": true
+  }, function(err, record) {
+      if (err) { console.error(err); return; }
+      console.log(record.getId());
+  });
+}
+
+
+
+export default { masterFetch, postToTable }
