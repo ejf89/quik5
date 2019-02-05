@@ -3,6 +3,8 @@ var $ = require('jquery');
 var Airtable = require('airtable')
 const AIRTABLE_KEY = process.env.AIRTABLE_KEY
 
+console.log(AIRTABLE_KEY);
+
 // var base = new Airtable({apiKey: 'key88K3RNIPwV1AgS'}).base('appLSROdM7sAWo7Xc');
 var base = new Airtable({apiKey: AIRTABLE_KEY}).base('appLSROdM7sAWo7Xc');
 
