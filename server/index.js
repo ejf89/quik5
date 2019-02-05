@@ -14,7 +14,7 @@ import HTML from '@shopify/react-html';
 import renderReactApp from './render-react-app';
 
 dotenv.config();
-const {SHOPIFY_API_KEY, SHOPIFY_SECRET} = process.env;
+const {SHOPIFY_API_KEY, SHOPIFY_SECRET, AIRTABLE_KEY} = process.env;
 
 const app = new Koa();
 app.use(session(app));
