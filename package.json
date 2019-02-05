@@ -25,6 +25,7 @@
     "@shopify/polaris": "^3.5.0",
     "@shopify/react-html": "^1.0.0",
     "@shopify/react-shopify-app-route-propagator": "^1.0.0",
+    "airtable": "^0.5.8",
     "apollo-boost": "^0.1.4",
     "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
