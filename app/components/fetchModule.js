@@ -6,8 +6,8 @@ const AIRTABLE_KEY = process.env.AIRTABLE_KEY
 
 console.log(AIRTABLE_KEY);
 console.log('KEYCHECK');
-var base = new Airtable({apiKey: `key88K3RNIPwV1AgS`}).base('appLSROdM7sAWo7Xc');
-// var base = new Airtable({apiKey: `${AIRTABLE_KEY}`}).base('appLSROdM7sAWo7Xc');
+// var base = new Airtable({apiKey: `key88K3RNIPwV1AgS`}).base('appLSROdM7sAWo7Xc');
+var base = new Airtable({apiKey: `${AIRTABLE_KEY}`}).base('appLSROdM7sAWo7Xc');
 
 
 
@@ -48,11 +48,10 @@ return postResponse
 
 }
 
-export function postToTable(store_url, dep_id, product_handle){
-  console.log('TRYING TO POST');
-
+export function postToTable(store_url, quik_url, dep_id, product_handle){
     var record = base('Table 1').create({
     "store_url": store_url,
+    "quiksite_url": quik_url,
     "deployment_id": dep_id,
     "product_handle": product_handle,
     "live": true
