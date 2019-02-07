@@ -62,7 +62,6 @@ class ExternalDeploy extends React.Component {
 
 
    handleChange = (value) => {
-     console.log(value);
      this.setState({store_url: value});
    };
 
@@ -71,11 +70,6 @@ class ExternalDeploy extends React.Component {
    }
 
    externalDeploy = () => {
-     console.log("STORE_URL");
-     console.log(this.state.store_url);
-     console.log("HANDLE");
-     console.log(this.state.external_product_handle);
-
      masterFetch( this.state.store_url, this.state.external_product_handle )
      .then( (res) => {
        this.setState({external_deploy_url: 'https://' + res.url})
@@ -84,8 +78,7 @@ class ExternalDeploy extends React.Component {
        return res
      } )
      .then( (res) => {
-       console.log(res);
-       postToTable( this.state.store_url, this.state.delete_id, this.state.external_product_handle )
+       postToTable( this.state.store_url,  this.state.external_deploy_url, this.state.delete_id, this.state.external_product_handle )
      } )
    }
 

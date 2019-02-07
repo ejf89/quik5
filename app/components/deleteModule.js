@@ -25,7 +25,7 @@ export async function deleteDeployment(deployment_id){
     return response
   });
   return deleteReponse
-}
+}  
 
 
 export function updateInTable(dep_id){
