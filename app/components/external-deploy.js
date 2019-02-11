@@ -1,5 +1,5 @@
 import { EmptyState, Layout, Page,  Heading, Subheading, Link, TextField, Button } from '@shopify/polaris';
-import { masterFetch, postToTable } from './fetchModule'
+import { masterFetch, postToTable, getPage, getScript } from './fetchModule'
 import { deleteDeployment, updateInTable } from './deleteModule'
 import axios from 'axios';
 import {$,jQuery} from 'jquery';
@@ -14,7 +14,10 @@ class ExternalDeploy extends React.Component {
      external_product_handle: '',
      external_deploy_url: '',
      delete_id: '',
-     deployment_response: ''
+     deployment_response: '',
+     encoded_html: '',
+     encoded_js: '',
+     ecoded_css: ''
    };
 
    render() {
@@ -61,6 +64,24 @@ class ExternalDeploy extends React.Component {
    }
 
 
+
+   componentDidMount() {
+    getScript()
+    .then( (script) => {
+      console.log("SCRIPT!!!!!@!!");
+      console.log(script);
+      this.setState({ encoded_js: script })
+    } )
+    .then( () => {
+      getPage()
+      .then( (page) => {
+        this.setState({ encoded_html: page })
+        console.log("HTML");
+        console.log(this.state.encoded_html);
+      } )
+    } )
+   }
+
    handleChange = (value) => {
      this.setState({store_url: value});
    };
@@ -70,7 +91,8 @@ class ExternalDeploy extends React.Component {
    }
 
    externalDeploy = () => {
-     masterFetch( this.state.store_url, this.state.external_product_handle )
+
+     masterFetch( this.state.store_url, this.state.external_product_handle, this.state.encoded_html, this.state.encoded_js )
      .then( (res) => {
        this.setState({external_deploy_url: 'https://' + res.url})
        this.setState({product_handle: this.state.external_product_handle})
