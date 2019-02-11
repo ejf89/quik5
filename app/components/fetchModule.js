@@ -33,7 +33,7 @@ export async function getPage(){
 export async function getScript(){
   var encoded_script;
   await $.ajax({
-   dataType: "script",
+   dataType: "text",
    url: 'deploy_script.js',
    success: function(res){
      console.log("IN SUCCESS");
