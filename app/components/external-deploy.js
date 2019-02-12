@@ -66,16 +66,21 @@ class ExternalDeploy extends React.Component {
 
 
    componentDidMount() {
-    getScript()
-    .then( (script) => {
-      this.setState({ encoded_js: script })
+    // getScript()
+    // .then( (script) => {
+    //   this.setState({ encoded_js: script })
+    // } )
+    // .then( () => {
+    //   getPage()
+    //   .then( (page) => {
+    //     this.setState({ encoded_html: page })
+    //   } )
+    // })
+
+    getPage()
+    .then( (page) => {
+      this.setState({ encoded_html: page })
     } )
-    .then( () => {
-      getPage()
-      .then( (page) => {
-        this.setState({ encoded_html: page })
-      } )
-    })
     console.log('ASSETS FETCHED');
    }
 
@@ -89,7 +94,7 @@ class ExternalDeploy extends React.Component {
 
    externalDeploy = () => {
 
-     masterFetch( this.state.store_url, this.state.external_product_handle, this.state.encoded_html, this.state.encoded_js )
+     masterFetch( this.state.store_url, this.state.external_product_handle, this.state.encoded_html )
      .then( (res) => {
        this.setState({external_deploy_url: 'https://' + res.url})
        this.setState({product_handle: this.state.external_product_handle})
