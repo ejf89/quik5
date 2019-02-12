@@ -68,18 +68,15 @@ class ExternalDeploy extends React.Component {
    componentDidMount() {
     getScript()
     .then( (script) => {
-      console.log("SCRIPT!!!!!@!!");
-      console.log(script);
       this.setState({ encoded_js: script })
     } )
     .then( () => {
       getPage()
       .then( (page) => {
         this.setState({ encoded_html: page })
-        console.log("HTML");
-        console.log(this.state.encoded_html);
       } )
-    } )
+    })
+    console.log('ASSETS FETCHED');
    }
 
    handleChange = (value) => {
