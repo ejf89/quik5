@@ -30,7 +30,7 @@ app.use(
     afterAuth(ctx) {
       const {shop, accessToken} = ctx.session;
 
-      console.log('We did it!', shop, accessToken);
+      console.log('AUTHORIZED', shop, accessToken);
 
       ctx.redirect('/');
     },
