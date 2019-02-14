@@ -2,8 +2,9 @@ import fetch from 'node-fetch'
 var $ = require('jquery');
 var Airtable = require('airtable')
 
+const SHOPIFY_API_KEY = process.env.SHOPIFY_API_KEY
 const AIRTABLE_KEY = process.env.AIRTABLE_KEY
-const NOW_TOKEN = process.env.AIRTABLE_KEY
+const NOW_TOKEN = process.env.NOW_TOKEN
 
 console.log(AIRTABLE_KEY);
 console.log(NOW_TOKEN);
