@@ -70,8 +70,8 @@ export async function masterFetch(store_url, product_handle, encoded_html){
   "url": "https://api.zeit.co/v2/now/deployments?teamId=team_Ayjtm3wiLicR7VxJOhbAcUMA",
   "method": "POST",
   "headers": {
-    // "Authorization": "Bearer lc874d1V2GLvXdppHIpcOnj1",
-    "Authorization": "Bearer " + NOW_TOKEN,
+    "Authorization": "Bearer lc874d1V2GLvXdppHIpcOnj1",
+    // "Authorization": "Bearer " + NOW_TOKEN,
     "Content-Type": "application/json"
   },
   "processData": false,
