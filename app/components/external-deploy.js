@@ -12,6 +12,7 @@ class ExternalDeploy extends React.Component {
      product_handle: '',
      store_url: '',
      external_product_handle: '',
+     logo_url: '',
      external_deploy_url: '',
      delete_id: '',
      deployment_response: '',
@@ -38,6 +39,13 @@ class ExternalDeploy extends React.Component {
                                 label="Enter Product Handle"
                                 >
                      {this.state.external_product_handle}</TextField>
+
+                     <TextField onChange={this.valueUpdater('logo_url')}
+                                value={this.state.logo_url}
+                                placeholder="optional"
+                                label="Enter Logo URL"
+                                >
+                     {this.state.logo_url}</TextField>
                      <br></br>
                      <Button onClick={this.externalDeploy}>Deploy Quiksite</Button>
                      <Heading>You're Quik.site will be available at:</Heading>
@@ -94,7 +102,7 @@ class ExternalDeploy extends React.Component {
 
    externalDeploy = () => {
 
-     masterFetch( this.state.store_url, this.state.external_product_handle, this.state.encoded_html )
+     masterFetch( this.state.store_url, this.state.external_product_handle, this.state.logo_url )
      .then( (res) => {
        this.setState({external_deploy_url: 'https://' + res.url})
        this.setState({product_handle: this.state.external_product_handle})

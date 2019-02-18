@@ -29,7 +29,8 @@ app.use(
     scopes: ['write_products'],
     afterAuth(ctx) {
       const {shop, accessToken} = ctx.session;
-
+      console.log(shop)
+      ctx.cookies.set('shopOrigin', shop, { httpOnly: false })
       console.log('AUTHORIZED', shop, accessToken);
 
       ctx.redirect('/');
