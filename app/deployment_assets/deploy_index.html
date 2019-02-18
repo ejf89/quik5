@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+  <!-- <script src="/node_modules/now-env/index.js"></script> -->
+
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  <link rel="stylesheet" href="bismuth.css">
+
+</head>
+
+<body>
+
+  <div id="app">
+    <div class="quiksite-container">
+      <a v-bind:href="store_url"> <div class="store-name">{{ store_name }}</div></a>
+
+      <div class="product-container">
+        <div class="slider">
+          <img class="product-image" v-for="image in product_images" v-bind:src="image.src" alt=""></img>
+        </div>
+
+        <div class="product-handle">
+          {{ product_handle }}
+        </div>
+
+        <div class="horizontal-container">
+          <div class="price">
+            ${{ product_price }}
+          </div>
+
+          <!-- <label for="business">Quantity</label> -->
+          <select id="quantity" class="quantity">
+            <option value="1">QT = 1</option>
+            <option value="2">QT = 2</option>
+            <option value="3">QT = 3</option>
+            <option value="4">QT = 4</option>
+            <option value="5">QT = 5</option>
+            <option value="6">QT = 6</option>
+          </select>
+        </div>
+
+
+
+        <div class="product-description">
+          {{ product_description }}
+        </div>
+
+
+        <div class="bottom-container">
+
+          <div class="option-parent-container" v-if="options.length > 0">
+            <div class="option" v-for="option in options">
+              <select class="option-select" v-bind:id="option.name" v-bind:name="option.name">
+                <option value="">{{ option.name }}</option>
+                <option v-for="value in option.values" v-bind.value="value">{{ value }}</option>
+
+              </select>
+            </div>
+          </div>
+
+
+          <div class="checkout" v-on:click="sendCart()">
+            Checkout
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- <script src="bundle_test.js"></script> -->
+  <script src="index.js"></script>
+</body>
+</html>

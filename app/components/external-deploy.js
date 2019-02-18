@@ -1,5 +1,5 @@
 import { EmptyState, Layout, Page,  Heading, Subheading, Link, TextField, Button } from '@shopify/polaris';
-import { masterFetch, postToTable } from './fetchModule'
+import { masterFetch, postToTable, getPage, getScript } from './fetchModule'
 import { deleteDeployment, updateInTable } from './deleteModule'
 import axios from 'axios';
 import {$,jQuery} from 'jquery';
@@ -12,9 +12,13 @@ class ExternalDeploy extends React.Component {
      product_handle: '',
      store_url: '',
      external_product_handle: '',
+     logo_url: '',
      external_deploy_url: '',
      delete_id: '',
-     deployment_response: ''
+     deployment_response: '',
+     encoded_html: '',
+     encoded_js: '',
+     ecoded_css: ''
    };
 
    render() {
@@ -35,6 +39,13 @@ class ExternalDeploy extends React.Component {
                                 label="Enter Product Handle"
                                 >
                      {this.state.external_product_handle}</TextField>
+
+                     <TextField onChange={this.valueUpdater('logo_url')}
+                                value={this.state.logo_url}
+                                placeholder="optional"
+                                label="Enter Logo URL"
+                                >
+                     {this.state.logo_url}</TextField>
                      <br></br>
                      <Button onClick={this.externalDeploy}>Deploy Quiksite</Button>
                      <Heading>You're Quik.site will be available at:</Heading>
@@ -61,6 +72,26 @@ class ExternalDeploy extends React.Component {
    }
 
 
+
+   componentDidMount() {
+    // getScript()
+    // .then( (script) => {
+    //   this.setState({ encoded_js: script })
+    // } )
+    // .then( () => {
+    //   getPage()
+    //   .then( (page) => {
+    //     this.setState({ encoded_html: page })
+    //   } )
+    // })
+
+    getPage()
+    .then( (page) => {
+      this.setState({ encoded_html: page })
+    } )
+    console.log('ASSETS FETCHED');
+   }
+
    handleChange = (value) => {
      this.setState({store_url: value});
    };
@@ -70,7 +101,8 @@ class ExternalDeploy extends React.Component {
    }
 
    externalDeploy = () => {
-     masterFetch( this.state.store_url, this.state.external_product_handle )
+
+     masterFetch( this.state.store_url, this.state.external_product_handle, this.state.logo_url )
      .then( (res) => {
        this.setState({external_deploy_url: 'https://' + res.url})
        this.setState({product_handle: this.state.external_product_handle})
